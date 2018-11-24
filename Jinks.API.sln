@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jinks.API", "Jinks.API\Jinks.API.csproj", "{0E79BB9B-CAE7-4DDE-A896-FF906066FB4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jinks.Repository", "Jinks.Repository\Jinks.Repository.csproj", "{3E7E5D43-5A89-405F-B8C0-A6EFF4ED53AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jinks.Repository", "Jinks.Repository\Jinks.Repository.csproj", "{3E7E5D43-5A89-405F-B8C0-A6EFF4ED53AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jinks.API.Tests", "Jinks.API.Tests\Jinks.API.Tests.csproj", "{D546D65F-2C67-4BCD-AFF4-C0EB42475EFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{3E7E5D43-5A89-405F-B8C0-A6EFF4ED53AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E7E5D43-5A89-405F-B8C0-A6EFF4ED53AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E7E5D43-5A89-405F-B8C0-A6EFF4ED53AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D546D65F-2C67-4BCD-AFF4-C0EB42475EFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D546D65F-2C67-4BCD-AFF4-C0EB42475EFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D546D65F-2C67-4BCD-AFF4-C0EB42475EFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D546D65F-2C67-4BCD-AFF4-C0EB42475EFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

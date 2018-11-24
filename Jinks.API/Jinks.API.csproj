@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Models\Validation\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

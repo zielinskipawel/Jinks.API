@@ -7,6 +7,7 @@ namespace Jinks.API.Models.Dto
 {
   public class Product : ProductBase
   {
+
     public long Id { get; set; }
   }
 }

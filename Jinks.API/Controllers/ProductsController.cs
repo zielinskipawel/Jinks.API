@@ -34,6 +34,10 @@ namespace Jinks.API.Controllers
     [ProducesResponseType(201)]
     public ActionResult<Product> Post(Models.Dto.Product product)
     {
+      if (!ModelState.IsValid)
+      {
+        BadRequest(ModelState);
+      }
       _repository.AddProduct(Models.Converters.ProductConverter.ToDto(product));
       return CreatedAtAction(nameof(Get), new { id = product.Id }, product);
     }
