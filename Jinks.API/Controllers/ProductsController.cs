@@ -2,43 +2,44 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Jinks.API.Models.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Jinks.API.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  public class ValuesController : ControllerBase
+  public class ProductsController : ControllerBase
   {
     // GET api/values
     [HttpGet]
-    public ActionResult<IEnumerable<string>> Get()
+    public ActionResult<IEnumerable<Product>> Get()
     {
-      return new string[] { "value1", "value2" };
+      return new Product[] { new Product(), new Product() };
     }
 
     // GET api/values/5
     [HttpGet("{id}")]
-    public ActionResult<string> Get(int id)
+    public ActionResult<Product> Get(int id)
     {
-      return "value";
+      return new Product();
     }
 
     // POST api/values
     [HttpPost]
-    public void Post([FromBody] string value)
+    public void Post([FromBody] Product value)
     {
     }
 
     // PUT api/values/5
     [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
+    public void Put(long id, [FromBody] ProductPut value)
     {
     }
 
     // DELETE api/values/5
     [HttpDelete("{id}")]
-    public void Delete(int id)
+    public void Delete(long id)
     {
     }
   }
