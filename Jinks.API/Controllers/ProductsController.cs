@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Jinks.API.Models.Dto;
+using Jinks.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Jinks.API.Controllers
@@ -11,6 +10,13 @@ namespace Jinks.API.Controllers
   [ApiController]
   public class ProductsController : ControllerBase
   {
+    private readonly ProductsRepository _repository;
+
+    public ProductsController(ProductsRepository repository)
+    {
+      _repository = repository;
+    }
+
     [HttpGet]
     public ActionResult<IEnumerable<Product>> Get()
     {
@@ -24,13 +30,20 @@ namespace Jinks.API.Controllers
     }
 
     [HttpPost]
-    public void Post([FromBody] Product value)
+    [ProducesResponseType(201)]
+    public ActionResult<Product> Post(Models.Dto.Product product)
     {
+      _repository.AddProduct(Models.Converters.ProductConverter.ToDto(product));
+      return CreatedAtAction(nameof(Get), new { id = product.Id }, product);
     }
 
     [HttpPut("{id}")]
     public void Put(long id, [FromBody] ProductPut value)
     {
+      if (!ModelState.IsValid)
+      {
+        BadRequest();
+      }
     }
 
     [HttpDelete("{id}")]
