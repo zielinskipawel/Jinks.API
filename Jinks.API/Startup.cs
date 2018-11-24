@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Jinks.Repository;
+using Jinks.Repository.Interfaces;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +20,8 @@ namespace Jinks.API
 
     public void ConfigureServices(IServiceCollection services)
     {
+      services.AddSingleton<IProductsRepository, ProductsRepository>();
+
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
       services.AddSwaggerGen(c =>
       {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Jinks.API.Models.Dto;
 using Jinks.Repository;
+using Jinks.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Jinks.API.Controllers
@@ -10,9 +11,9 @@ namespace Jinks.API.Controllers
   [ApiController]
   public class ProductsController : ControllerBase
   {
-    private readonly ProductsRepository _repository;
+    private readonly IProductsRepository _repository;
 
-    public ProductsController(ProductsRepository repository)
+    public ProductsController(IProductsRepository repository)
     {
       _repository = repository;
     }
