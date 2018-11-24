@@ -11,33 +11,28 @@ namespace Jinks.API.Controllers
   [ApiController]
   public class ProductsController : ControllerBase
   {
-    // GET api/values
     [HttpGet]
     public ActionResult<IEnumerable<Product>> Get()
     {
       return new Product[] { new Product(), new Product() };
     }
 
-    // GET api/values/5
     [HttpGet("{id}")]
     public ActionResult<Product> Get(int id)
     {
       return new Product();
     }
 
-    // POST api/values
     [HttpPost]
     public void Post([FromBody] Product value)
     {
     }
 
-    // PUT api/values/5
     [HttpPut("{id}")]
     public void Put(long id, [FromBody] ProductPut value)
     {
     }
 
-    // DELETE api/values/5
     [HttpDelete("{id}")]
     public void Delete(long id)
     {
