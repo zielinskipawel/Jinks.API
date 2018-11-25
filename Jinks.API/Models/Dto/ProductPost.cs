@@ -1,7 +1,7 @@
 ﻿
 namespace Jinks.API.Models.Dto
 {
-  public class ProductPut : ProductBase
+  public class ProductPost : ProductBase
   {
 
   }

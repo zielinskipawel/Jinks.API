@@ -6,6 +6,7 @@ namespace Jinks.API.Models.Converters.Mapping
   {
     public ProductProfile()
     {
+      CreateMap<Repository.Models.Product, Dto.ProductPost>().ReverseMap();
       CreateMap<Repository.Models.Product, Dto.Product>().ReverseMap();
     }
   }

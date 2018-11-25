@@ -7,9 +7,15 @@ namespace Jinks.Repository
 {
   public class ProductsRepository: IProductsRepository
   {
-    public void AddProduct(Product product)
+    public long AddProduct(Product product)
     {
       Debug.Print("Add Product to Database");
+      return 23;
+    }
+
+    public Product GetProduct(long id)
+    {
+      return new Product();
     }
   }
 }

@@ -4,6 +4,7 @@ namespace Jinks.Repository.Interfaces
 {
   public interface IProductsRepository
   {
-    void AddProduct(Product product);
+    long AddProduct(Product product);
+    Product GetProduct(long id);
   }
 }

@@ -39,7 +39,7 @@ namespace Jinks.API.Controllers
     [ProducesResponseType(403)]
     [ProducesResponseType(404)]
     [ProducesResponseType(500)]
-    public ActionResult<Product> Post(Models.Dto.Product product)
+    public ActionResult<Product> Post(Models.Dto.ProductPost product)
     {
       try
       {
@@ -47,8 +47,14 @@ namespace Jinks.API.Controllers
         {
           BadRequest(ModelState);
         }
-        _repository.AddProduct(_converter.ToRepository(product));
-        return CreatedAtAction(nameof(Get), new { id = product.Id }, product);
+
+        long id = _repository.AddProduct(_converter.ToRepository(product));
+        //get from repository by id
+        //Repository.Models.Product result = _repository.GetProduct(id);
+        //Mock
+        Repository.Models.Product repoResult = new Repository.Models.Product { Id = id, Name = product.Name, Price = product.Price };
+        API.Models.Dto.Product  result = _converter.ToDto(repoResult);
+        return CreatedAtAction(nameof(Get), new { id = id }, result);
       }
       catch (Exception ex)
       {
@@ -59,7 +65,7 @@ namespace Jinks.API.Controllers
 
     [HttpPut("{id}")]
     [ClaimRequirement]
-    public void Put(long id, [FromBody] ProductPut value)
+    public void Put(long id, [FromBody] ProductPost value)
     {
       if (!ModelState.IsValid)
       {
