@@ -1,6 +1,5 @@
 ﻿using Jinks.API.Controllers;
 using Jinks.Repository.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
 
