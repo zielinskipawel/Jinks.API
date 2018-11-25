@@ -39,6 +39,8 @@ namespace Jinks.API.Controllers
     [ProducesResponseType(403)]
     [ProducesResponseType(404)]
     [ProducesResponseType(500)]
+    //turn off for demo
+    //[ClaimRequirement]
     public ActionResult<Product> Post(Models.Dto.ProductPost product)
     {
       try
@@ -49,16 +51,17 @@ namespace Jinks.API.Controllers
         }
 
         long id = _repository.AddProduct(_converter.ToRepository(product));
-        //get from repository by id
+        ///TODO:log error
         //Repository.Models.Product result = _repository.GetProduct(id);
-        //Mock
+        //Fake - repo not ready
         Repository.Models.Product repoResult = new Repository.Models.Product { Id = id, Name = product.Name, Price = product.Price };
+
         API.Models.Dto.Product  result = _converter.ToDto(repoResult);
         return CreatedAtAction(nameof(Get), new { id = id }, result);
       }
       catch (Exception ex)
       {
-        ///log error
+        ///TODO:log error
         throw;
       }
     }
