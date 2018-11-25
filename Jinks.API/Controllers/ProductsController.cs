@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Jinks.API.Attributes;
 using Jinks.API.Models.Converters;
 using Jinks.API.Models.Dto;
 using Jinks.Repository.Interfaces;
@@ -34,6 +35,8 @@ namespace Jinks.API.Controllers
 
     [HttpPost]
     [ProducesResponseType(201)]
+    [ProducesResponseType(403)]
+    [ClaimRequirement]
     public ActionResult<Product> Post(Models.Dto.Product product)
     {
       if (!ModelState.IsValid)
