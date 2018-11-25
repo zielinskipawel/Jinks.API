@@ -1,8 +1,8 @@
 ﻿using Jinks.API.Controllers;
+using Jinks.API.Models.Converters;
 using Jinks.Repository.Interfaces;
 using Moq;
 using NUnit.Framework;
-
 
 namespace Jinks.API.Tests.Controllers
 {
@@ -10,6 +10,7 @@ namespace Jinks.API.Tests.Controllers
   class ProductsControllerTests
   {
     private Mock<IProductsRepository> _productsRepositoryMock;
+    private Mock<IProductConverter> _productsConverterMock;
     private ProductsController controller;
 
     [OneTimeSetUp]
@@ -27,7 +28,8 @@ namespace Jinks.API.Tests.Controllers
     public void Setup()
     {
       _productsRepositoryMock = new Mock<IProductsRepository>();
-      controller = new ProductsController(_productsRepositoryMock.Object);
+      _productsConverterMock = new Mock<IProductConverter>();
+      controller = new ProductsController(_productsRepositoryMock.Object, _productsConverterMock.Object);
     }
 
     [Test]
@@ -39,6 +41,7 @@ namespace Jinks.API.Tests.Controllers
       var result = controller.Post(product);
       // Assert
       _productsRepositoryMock.Verify(x => x.AddProduct(It.IsAny<Jinks.Repository.Models.Product>()), Times.Once());
+      _productsConverterMock.Verify(x => x.ToRepository(It.IsAny<Jinks.API.Models.Dto.Product>()), Times.Once());
     }
   }
 }

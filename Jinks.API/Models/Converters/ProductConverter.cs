@@ -1,17 +1,26 @@
-﻿using Jinks.API.Models.Dto;
+﻿using AutoMapper;
+using Jinks.API.Models.Dto;
 
 namespace Jinks.API.Models.Converters
 {
-  public static class ProductConverter
+  public class ProductConverter : IProductConverter
   {
-    public static Product ToDto(Jinks.Repository.Models.Product productRepo)
+    private readonly IMapper _mapper;
+    public ProductConverter(IMapper mapper)
     {
-      return new Product();
+      _mapper = mapper;
     }
 
-    public static Jinks.Repository.Models.Product ToDto(Product productDto)
+    public Product ToDto(Jinks.Repository.Models.Product productRepo)
     {
-      return new Jinks.Repository.Models.Product();
+      Dto.Product result = Mapper.Map<Dto.Product>(productRepo);
+      return result;
+    }
+
+    public Jinks.Repository.Models.Product ToRepository(Product productDto)
+    {
+      Repository.Models.Product result = Mapper.Map<Repository.Models.Product>(productDto);
+      return result;
     }
   }
 }

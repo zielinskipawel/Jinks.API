@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Jinks.API.Models.Converters;
 using Jinks.API.Models.Dto;
-using Jinks.Repository;
 using Jinks.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,10 +12,12 @@ namespace Jinks.API.Controllers
   public class ProductsController : ControllerBase
   {
     private readonly IProductsRepository _repository;
+    private readonly IProductConverter _converter;
 
-    public ProductsController(IProductsRepository repository)
+    public ProductsController(IProductsRepository repository, IProductConverter converter)
     {
       _repository = repository;
+      _converter = converter;
     }
 
     [HttpGet]
@@ -38,7 +40,7 @@ namespace Jinks.API.Controllers
       {
         BadRequest(ModelState);
       }
-      _repository.AddProduct(Models.Converters.ProductConverter.ToDto(product));
+      _repository.AddProduct(_converter.ToRepository(product));
       return CreatedAtAction(nameof(Get), new { id = product.Id }, product);
     }
 

@@ -1,4 +1,7 @@
-﻿using Jinks.Repository;
+﻿using AutoMapper;
+using Jinks.API.Models.Converters;
+using Jinks.API.Models.Converters.Mapping;
+using Jinks.Repository;
 using Jinks.Repository.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,6 +24,15 @@ namespace Jinks.API
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddSingleton<IProductsRepository, ProductsRepository>();
+      services.AddSingleton<IProductConverter, ProductConverter>();
+
+      var mappingConfig = new MapperConfiguration(mc =>
+      {
+        mc.AddProfile(new ProductProfile());
+      });
+
+      IMapper mapper = mappingConfig.CreateMapper();
+      services.AddSingleton(mapper);
 
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
       services.AddSwaggerGen(c =>
