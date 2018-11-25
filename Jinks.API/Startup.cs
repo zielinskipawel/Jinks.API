@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Owin.Builder;
+using Microsoft.Owin.Logging;
 using Owin;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -65,6 +66,8 @@ namespace Jinks.API
       app.UseOwin(setup => setup(next =>
       {
         AppBuilder owinAppBuilder = new AppBuilder();
+
+        owinAppBuilder.SetLoggerFactory(new DiagnosticsLoggerFactory());
 
         IdentityServerBearerTokenAuthenticationOptions authenticationOptions = new IdentityServerBearerTokenAuthenticationOptions
         {
