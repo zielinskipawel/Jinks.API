@@ -10,12 +10,14 @@ using Jinks.API.Models.Converters;
 using Jinks.API.Models.Converters.Mapping;
 using Jinks.Repository;
 using Jinks.Repository.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.Owin.Builder;
 using Microsoft.Owin.Logging;
 using Owin;
@@ -57,6 +59,25 @@ namespace Jinks.API
         });
         c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
       });
+      services.AddAuthentication(o =>
+      {
+        o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+      })
+       .AddJwtBearer(o =>
+            {
+              o.Audience = Configuration["Settings:Authentication:ApiName"];
+              o.Authority = Configuration["Settings:Authentication:Authority"];
+              o.TokenValidationParameters = new TokenValidationParameters
+              {
+                ValidateAudience = true,
+                ValidAudiences = new List<string>() {
+                        "api.read",
+                        "api.write"
+                    },
+                ValidateIssuer = true
+              };
+            });
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)

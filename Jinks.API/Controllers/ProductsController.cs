@@ -35,7 +35,10 @@ namespace Jinks.API.Controllers
 
     [HttpPost]
     [ProducesResponseType(201)]
+    [ProducesResponseType(401)]
     [ProducesResponseType(403)]
+    [ProducesResponseType(404)]
+    [ProducesResponseType(500)]
     [ClaimRequirement]
     public ActionResult<Product> Post(Models.Dto.Product product)
     {
