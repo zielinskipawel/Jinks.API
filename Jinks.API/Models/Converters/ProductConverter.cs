@@ -8,14 +8,14 @@ namespace Jinks.API.Models.Converters
 {
   public static class ProductConverter
   {
-    public static Product ToDto(Jink.Repository.Models.Product productRepo)
+    public static Product ToDto(Jinks.Repository.Models.Product productRepo)
     {
       return new Product();
     }
 
-    public static Jink.Repository.Models.Product ToDto(Product productDto)
+    public static Jinks.Repository.Models.Product ToDto(Product productDto)
     {
-      return new Jink.Repository.Models.Product();
+      return new Jinks.Repository.Models.Product();
     }
   }
 }

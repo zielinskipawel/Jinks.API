@@ -10,7 +10,7 @@ namespace Jinks.API.Tests.Models.Validation
   class ProductsValidationTests
   {
     [Test]
-    public void Model_Should_return_validation_error_when_model_is_empty()
+    public void Model_when_prop_are_not_set_should_return_validation_error()
     {
 
       API.Models.Dto.Product product = new API.Models.Dto.Product();
@@ -18,10 +18,18 @@ namespace Jinks.API.Tests.Models.Validation
     }
 
     [Test]
-    public void test1()
+    public void Model_when_all_prop_are_set_should_not_return_validation_error()
     {
 
       API.Models.Dto.Product product = new API.Models.Dto.Product { Id = 111, Name = "Product Name", Price = 1.1M };
+      Assert.IsTrue(ValidateModel(product).Count == 0);
+    }
+
+    [Test]
+    public void Model_Id_not_set_should_not_return_validation_error()
+    {
+
+      API.Models.Dto.Product product = new API.Models.Dto.Product { Name = "Product Name", Price = 1.1M };
       Assert.IsTrue(ValidateModel(product).Count == 0);
     }
 

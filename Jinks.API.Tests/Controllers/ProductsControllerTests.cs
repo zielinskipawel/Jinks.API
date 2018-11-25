@@ -1,18 +1,15 @@
-﻿using AutoFixture;
-using AutoFixture.AutoMoq;
-using Jinks.API.Controllers;
+﻿using Jinks.API.Controllers;
 using Jinks.Repository.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+
 
 namespace Jinks.API.Tests.Controllers
 {
   [TestFixture]
   class ProductsControllerTests
   {
-    private IFixture _mockFixture;
     private Mock<IProductsRepository> _productsRepositoryMock;
     private ProductsController controller;
 
@@ -30,14 +27,19 @@ namespace Jinks.API.Tests.Controllers
     [SetUp]
     public void Setup()
     {
-      _mockFixture = new Fixture().Customize(new AutoMoqCustomization());
-      _productsRepositoryMock = _mockFixture.Freeze<Mock<IProductsRepository>>();
-      controller = _mockFixture.Create<ProductsController>();
+      _productsRepositoryMock = new Mock<IProductsRepository>();
+      controller = new ProductsController(_productsRepositoryMock.Object);
     }
 
     [Test]
-    public void Post_Model_Should_return_badRequest_when_model_is_empty()
+    public void Post_Model_Should_execute_exactly_one_time()
     {
+      // Arrange
+      API.Models.Dto.Product product = new API.Models.Dto.Product();
+      // Act
+      var result = controller.Post(product);
+      // Assert
+      _productsRepositoryMock.Verify(x => x.AddProduct(It.IsAny<Jinks.Repository.Models.Product>()), Times.Once());
     }
   }
 }

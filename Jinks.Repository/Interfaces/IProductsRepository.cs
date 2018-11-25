@@ -1,4 +1,4 @@
-﻿using Jink.Repository.Models;
+﻿using Jinks.Repository.Models;
 
 namespace Jinks.Repository.Interfaces
 {

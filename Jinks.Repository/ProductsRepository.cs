@@ -1,5 +1,5 @@
-﻿using Jink.Repository.Models;
-using Jinks.Repository.Interfaces;
+﻿using Jinks.Repository.Interfaces;
+using Jinks.Repository.Models;
 using System;
 using System.Diagnostics;
 

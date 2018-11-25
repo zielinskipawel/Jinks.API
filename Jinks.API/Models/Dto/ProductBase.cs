@@ -10,7 +10,7 @@ namespace Jinks.API.Models.Dto
     public string Name { get; set; }
 
     [Required]
-    [Range(0.1, 10000)]
+    [Range(double.MinValue, double.MaxValue)]
     public decimal Price { get; set; }
   }
 }
