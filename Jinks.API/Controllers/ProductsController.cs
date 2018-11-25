@@ -51,6 +51,7 @@ namespace Jinks.API.Controllers
     }
 
     [HttpPut("{id}")]
+    [ClaimRequirement]
     public void Put(long id, [FromBody] ProductPut value)
     {
       if (!ModelState.IsValid)
@@ -60,6 +61,7 @@ namespace Jinks.API.Controllers
     }
 
     [HttpDelete("{id}")]
+    [ClaimRequirement]
     public void Delete(long id)
     {
     }
