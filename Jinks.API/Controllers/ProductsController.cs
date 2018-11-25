@@ -41,7 +41,7 @@ namespace Jinks.API.Controllers
     [ProducesResponseType(500)]
     //turn off for demo
     //[ClaimRequirement]
-    public ActionResult<Product> Post(Models.Dto.ProductPost product)
+    public ActionResult<Product> Post(ProductPost product)
     {
       try
       {

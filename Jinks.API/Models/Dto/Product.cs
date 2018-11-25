@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+﻿
 namespace Jinks.API.Models.Dto
 {
-  public class Product : ProductBase
+  public class Product
   {
     public long Id { get; set; }
+
+    public string Name { get; set; }
+
+    public decimal Price { get; set; }
   }
 }

@@ -11,7 +11,7 @@ namespace Jinks.API.Tests.Models.Validation
     public void Model_when_prop_are_not_set_should_return_validation_error()
     {
       // Arrange
-      API.Models.Dto.Product product = new API.Models.Dto.Product();
+      API.Models.Dto.ProductPost product = new API.Models.Dto.ProductPost();
       // Act
       // Assert
       Assert.IsTrue(ValidateModel(product).Count > 0);
