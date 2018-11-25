@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using IdentityServer3.AccessTokenValidation;
 using Jinks.API.Attributes;
 using Jinks.API.Models.Converters;
-using Jinks.API.Models.Converters.Mapping;
 using Jinks.Repository;
 using Jinks.Repository.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -36,18 +34,11 @@ namespace Jinks.API
 
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddSingleton<IProductsRepository, ProductsRepository>();
-      services.AddSingleton<IProductConverter, ProductConverter>();
+      services.AddScoped<IProductsRepository, ProductsRepository>();
+      services.AddScoped<IProductConverter, ProductConverter>();
       services.AddScoped<IAuthorizationFilter, ClaimRequirementFilter>();
-      services.AddScoped<Claim, Claim>();
 
-      var mappingConfig = new MapperConfiguration(mc =>
-      {
-        mc.AddProfile(new ProductProfile());
-      });
-
-      IMapper mapper = mappingConfig.CreateMapper();
-      services.AddSingleton(mapper);
+      services.AddAutoMapper();
 
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
       services.AddSwaggerGen(c =>

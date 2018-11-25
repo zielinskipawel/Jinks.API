@@ -39,15 +39,22 @@ namespace Jinks.API.Controllers
     [ProducesResponseType(403)]
     [ProducesResponseType(404)]
     [ProducesResponseType(500)]
-    [ClaimRequirement]
     public ActionResult<Product> Post(Models.Dto.Product product)
     {
-      if (!ModelState.IsValid)
+      try
       {
-        BadRequest(ModelState);
+        if (!ModelState.IsValid)
+        {
+          BadRequest(ModelState);
+        }
+        _repository.AddProduct(_converter.ToRepository(product));
+        return CreatedAtAction(nameof(Get), new { id = product.Id }, product);
       }
-      _repository.AddProduct(_converter.ToRepository(product));
-      return CreatedAtAction(nameof(Get), new { id = product.Id }, product);
+      catch (Exception ex)
+      {
+        ///log error
+        throw;
+      }
     }
 
     [HttpPut("{id}")]
