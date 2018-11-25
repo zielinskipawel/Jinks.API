@@ -33,15 +33,26 @@ namespace Jinks.API.Tests.Controllers
     }
 
     [Test]
-    public void Post_Model_Should_execute_exactly_one_time()
+    public void Post_Model_Should_execute_model_converter_exactly_one_time()
     {
       // Arrange
       API.Models.Dto.Product product = new API.Models.Dto.Product();
       // Act
       var result = controller.Post(product);
       // Assert
-      _productsRepositoryMock.Verify(x => x.AddProduct(It.IsAny<Jinks.Repository.Models.Product>()), Times.Once());
       _productsConverterMock.Verify(x => x.ToRepository(It.IsAny<Jinks.API.Models.Dto.Product>()), Times.Once());
+    }
+
+    [Test]
+    public void Post_Model_Should_execute_repository_exactly_one_time()
+    {
+      // Arrange
+      API.Models.Dto.Product product = new API.Models.Dto.Product();
+      // Act
+       var result = controller.Post(product);
+      
+      // Assert
+      _productsRepositoryMock.Verify(x => x.AddProduct(It.IsAny<Jinks.Repository.Models.Product>()), Times.Once());
     }
   }
 }
